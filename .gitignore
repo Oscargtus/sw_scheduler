@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Claude Code local settings (personal)
+.claude/settings.local.json
+
+# Licensed third-party templates — never commit
+wowdash-*/
+*Wow_dash*.zip
+
+# Dependencies / build output / env
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+*.log

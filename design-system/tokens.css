@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Scheduler UI — design tokens
+   Extracted from the admin template's SCSS (_variables.scss + components)
+   and normalized: 4px spacing grid, unified 8px control radius, and
+   contrast-safe "solid" fills (white text ≥ 4.5:1).
+
+   Usage:
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+     <link rel="stylesheet" href="design-system/tokens.css">
+     Dark mode: <html data-theme="dark">  (or follow the OS, see bottom)
+   ========================================================================== */
+
+:root {
+  /* ---------- Raw palette -------------------------------------------- */
+  --primary-50:  #E4F1FF;
+  --primary-100: #BFDCFF;
+  --primary-200: #95C7FF;
+  --primary-300: #6BB1FF;
+  --primary-400: #519FFF;
+  --primary-500: #458EFF;
+  --primary-600: #487FFF; /* brand */
+  --primary-700: #486CEA; /* action */
+  --primary-800: #4759D6; /* hover */
+  --primary-900: #4536B6; /* pressed */
+
+  --neutral-50:  #F5F6FA;
+  --neutral-100: #F3F4F6;
+  --neutral-200: #EBECEF;
+  --neutral-300: #D1D5DB;
+  --neutral-400: #9CA3AF;
+  --neutral-500: #6B7280;
+  --neutral-600: #4B5563;
+  --neutral-700: #374151;
+  --neutral-800: #1F2937;
+  --neutral-900: #111827;
+
+  --dark-1: #1B2431;
+  --dark-2: #273142;
+  --dark-3: #323D4E;
+  --white:  #FFFFFF;
+
+  /* ---------- Semantic families -------------------------------------- */
+  /* solid = fill for buttons/badges, solid-fg = text on it,
+     surface/border/text = soft (tinted) variant */
+  --primary-solid:    var(--primary-700);
+  --primary-solid-fg: #FFFFFF;
+  --primary-hover:    var(--primary-800);
+  --primary-pressed:  var(--primary-900);
+  --primary-surface:  var(--primary-50);
+  --primary-border:   var(--primary-100);
+  --primary-text:     var(--primary-800);
+
+  --secondary-solid:    #8252E9;
+  --secondary-solid-fg: #FFFFFF;
+  --secondary-hover:    #6F37E6;
+  --secondary-pressed:  #601EEF;
+  --secondary-surface:  #F0E1FF;
+  --secondary-border:   #DCC0F8;
+  --secondary-text:     #6F37E6;
+
+  --success-solid:    #15803D;
+  --success-solid-fg: #FFFFFF;
+  --success-hover:    #166534;
+  --success-pressed:  #14532D;
+  --success-surface:  #DCFCE7;
+  --success-border:   #B5E1C3;
+  --success-text:     #15803D;
+
+  --warning-solid:    #FF9F29;
+  --warning-solid-fg: #111827; /* dark text: white on orange fails contrast */
+  --warning-hover:    #F39016;
+  --warning-pressed:  #E58209;
+  --warning-surface:  #FFF9E2;
+  --warning-border:   #FFEBA6;
+  --warning-text:     #B45309;
+
+  --danger-solid:    #DC2626;
+  --danger-solid-fg: #FFFFFF;
+  --danger-hover:    #B91C1C;
+  --danger-pressed:  #991B1B;
+  --danger-surface:  #FEE2E2;
+  --danger-border:   #FECACA;
+  --danger-text:     #B91C1C;
+
+  --info-solid:    #144BD6;
+  --info-solid-fg: #FFFFFF;
+  --info-hover:    #1E40AF;
+  --info-pressed:  #06307C;
+  --info-surface:  #E7EEFC;
+  --info-border:   #AECAFC;
+  --info-text:     #144BD6;
+
+  /* ---------- Data / calendar accents (fills only, never text) ------- */
+  --accent-1: #487FFF; /* blue   */
+  --accent-2: #45B369; /* green  */
+  --accent-3: #FF9F29; /* orange */
+  --accent-4: #8252E9; /* purple */
+  --accent-5: #00B8F2; /* cyan   */
+  --accent-6: #DE3ACE; /* pink   */
+  --accent-7: #EF4A00; /* red    */
+
+  /* ---------- Theme roles (light) ------------------------------------ */
+  --brand:          var(--primary-600);
+  --bg-page:        var(--neutral-50);
+  --bg-surface:     var(--white);
+  --bg-subtle:      var(--neutral-100);
+  --bg-input:       var(--white);
+  --bg-input-muted: var(--neutral-50);  /* search, read-only */
+  --bg-disabled:    var(--neutral-100);
+
+  --text-primary:   var(--neutral-900);
+  --text-secondary: var(--neutral-600);
+  --text-muted:     var(--neutral-500);
+  --text-disabled:  var(--neutral-400);
+  --text-label:     var(--neutral-700);
+  --text-link:      var(--primary-700);
+  --text-link-hover:var(--primary-800);
+  --text-on-solid:  #FFFFFF;
+
+  --border:         rgba(209, 213, 219, 0.5); /* card/section dividers */
+  --divider:        var(--neutral-200);
+  --input-stroke:   var(--neutral-300);
+  --focus-stroke:   var(--primary-600);
+
+  /* ---------- Typography --------------------------------------------- */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* size / line-height pairs */
+  --text-3xl:  2rem;      --leading-3xl:  2.5rem;   /* 32/40 KPI values */
+  --text-2xl:  1.75rem;   --leading-2xl:  2.25rem;  /* 28/36 */
+  --text-xl:   1.5rem;    --leading-xl:   2rem;     /* 24/32 page title */
+  --text-lg:   1.25rem;   --leading-lg:   1.75rem;  /* 20/28 section */
+  --text-md:   1.125rem;  --leading-md:   1.625rem; /* 18/26 card title */
+  --text-base: 1rem;      --leading-base: 1.5rem;   /* 16/24 body */
+  --text-sm:   0.875rem;  --leading-sm:   1.25rem;  /* 14/20 labels, nav */
+  --text-xs:   0.75rem;   --leading-xs:   1rem;     /* 12/16 captions */
+  --text-2xs:  0.625rem;  --leading-2xs:  0.875rem; /* 10/14 counters */
+
+  /* ---------- Spacing (4px grid) ------------------------------------- */
+  --space-0:  0;
+  --space-1:  0.25rem; /*  4 */
+  --space-2:  0.5rem;  /*  8 */
+  --space-3:  0.75rem; /* 12 */
+  --space-4:  1rem;    /* 16 */
+  --space-5:  1.25rem; /* 20 */
+  --space-6:  1.5rem;  /* 24 */
+  --space-8:  2rem;    /* 32 */
+  --space-10: 2.5rem;  /* 40 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+
+  /* ---------- Radius ------------------------------------------------- */
+  --radius-xs:   4px;   /* badges, checkbox */
+  --radius-sm:   6px;   /* tooltip, chips, segmented item */
+  --radius-md:   8px;   /* buttons, inputs, cards, nav items */
+  --radius-lg:   12px;  /* modals, popovers, toasts */
+  --radius-full: 999px; /* pills, avatars, switch */
+
+  /* ---------- Elevation ---------------------------------------------- */
+  --shadow-card:    0 4px 30px rgba(46, 45, 116, 0.05);
+  --shadow-raised:  0 8px 24px rgba(46, 45, 116, 0.12);
+  --shadow-overlay: 0 20px 60px rgba(4, 6, 15, 0.20);
+  --shadow-segment: 0 2px 6px rgba(0, 0, 0, 0.10);
+  --focus-ring:        0 0 0 4px rgba(72, 127, 255, 0.25);
+  --focus-ring-strong: 0 0 0 4px rgba(72, 127, 255, 0.35);
+  --focus-ring-danger: 0 0 0 4px rgba(220, 38, 38, 0.30);
+
+  /* ---------- Sizing & layout ---------------------------------------- */
+  --control-sm: 40px;
+  --control-md: 44px;
+  --control-lg: 56px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --avatar-sm: 32px;
+  --avatar-md: 40px;
+  --avatar-lg: 48px;
+  --avatar-xl: 56px;
+
+  --navbar-height:     72px;
+  --sidebar-width:     275px;
+  --sidebar-collapsed: 86px;
+  --content-gutter:    24px;
+  --card-padding-y:    20px;
+  --card-padding-x:    24px;
+  --card-header-py:    16px;
+
+  /* Breakpoints (reference only — CSS vars can't be used in media queries)
+     sm 576 · md 768 · lg 992 · xl 1200 · xxl 1400 */
+
+  /* ---------- Motion ------------------------------------------------- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  color-scheme: light;
+}
+
+/* ========================================================================
+   Dark theme
+   ======================================================================== */
+[data-theme="dark"] {
+  --bg-page:        var(--dark-1);
+  --bg-surface:     var(--dark-2);
+  --bg-subtle:      var(--dark-3);
+  --bg-input:       var(--dark-3);
+  --bg-input-muted: var(--dark-3);
+  --bg-disabled:    #2C3646;
+
+  --text-primary:   #FFFFFF;
+  --text-secondary: #D1D5DB;
+  --text-muted:     #9CA3AF;
+  --text-disabled:  #6B7280;
+  --text-label:     #D1D5DB;
+  --text-link:      var(--primary-400);
+  --text-link-hover:var(--primary-300);
+
+  --border:       rgba(209, 213, 219, 0.2);
+  --divider:      rgba(209, 213, 219, 0.12);
+  --input-stroke: #4B5563;
+
+  /* soft surfaces become low-alpha tints on dark */
+  --primary-surface:   rgba(72, 127, 255, 0.15);
+  --primary-border:    rgba(72, 127, 255, 0.30);
+  --primary-text:      var(--primary-300);
+  --secondary-surface: rgba(130, 82, 233, 0.18);
+  --secondary-border:  rgba(130, 82, 233, 0.35);
+  --secondary-text:    #CD9FFA;
+  --success-surface:   rgba(69, 179, 105, 0.15);
+  --success-border:    rgba(69, 179, 105, 0.30);
+  --success-text:      #4ADE80;
+  --warning-surface:   rgba(255, 159, 41, 0.15);
+  --warning-border:    rgba(255, 159, 41, 0.30);
+  --warning-text:      #FACC15;
+  --danger-surface:    rgba(239, 68, 68, 0.15);
+  --danger-border:     rgba(239, 68, 68, 0.30);
+  --danger-text:       #F87171;
+  --info-surface:      rgba(59, 130, 246, 0.15);
+  --info-border:       rgba(59, 130, 246, 0.30);
+  --info-text:         #60A5FA;
+
+  --shadow-card:   0 4px 30px rgba(0, 0, 0, 0.25);
+  --shadow-raised: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+  color-scheme: dark;
+}
+
+/* Optional: follow the OS when no explicit theme is set.
+   Copy the [data-theme="dark"] block into this query if you want it. */
+/* @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } } */
+
+/* ========================================================================
+   Base
+   ======================================================================== */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-secondary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}

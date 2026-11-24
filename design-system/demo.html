@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheduler UI — demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+</svg>
+
+<div class="ui-shell">
+  <aside class="ui-sidebar" id="sidebar">
+    <a class="ui-sidebar__brand" href="#">
+      <span class="ui-sidebar__logo"><svg class="ui-icon"><use href="#i-cal"/></svg></span>
+      <span class="ui-sidebar__name">Scheduler</span>
+    </a>
+    <nav class="ui-nav" aria-label="Main">
+      <div class="ui-nav__group">
+        <span class="ui-nav__title">Overview</span>
+        <a class="ui-nav__link" href="#"><svg class="ui-icon" aria-hidden="true"><use href="#i-grid"/></svg><span>Dashboard</span></a>
+      </div>
+      <div class="ui-nav__group">
+        <span class="ui-nav__title">Schedule</span>
+        <a class="ui-nav__link" href="#" aria-current="page"><svg class="ui-icon" aria-hidden="true"><use href="#i-cal"/></svg><span>Calendar</span></a>
+        <a class="ui-nav__link" href="#"><svg class="ui-icon" aria-hidden="true"><use href="#i-check"/></svg><span>Bookings</span><span class="ui-count">3</span></a>
+        <a class="ui-nav__link" href="#"><svg class="ui-icon" aria-hidden="true"><use href="#i-clock"/></svg><span>Shifts</span></a>
+      </div>
+      <div class="ui-nav__group">
+        <span class="ui-nav__title">Team</span>
+        <a class="ui-nav__link" href="#"><svg class="ui-icon" aria-hidden="true"><use href="#i-users"/></svg><span>People</span></a>
+      </div>
+    </nav>
+  </aside>
+  <div class="ui-sidebar-backdrop" id="backdrop"></div>
+
+  <div class="ui-shell__main">
+    <header class="ui-navbar">
+      <div class="ui-navbar__start">
+        <button class="ui-btn ui-btn--ghost ui-btn--icon ui-btn--sm" id="menu" aria-label="Toggle sidebar"><svg class="ui-icon"><use href="#i-menu"/></svg></button>
+        <div class="ui-input-icon">
+          <svg class="ui-icon ui-icon--sm"><use href="#i-search"/></svg>
+          <input class="ui-input" type="search" placeholder="Search events, people, rooms" aria-label="Search">
+        </div>
+      </div>
+      <div class="ui-navbar__end">
+        <button class="ui-icon-btn" id="theme" aria-label="Toggle dark theme"><svg class="ui-icon"><use href="#i-moon"/></svg></button>
+        <button class="ui-icon-btn" aria-label="Notifications, 2 unread"><svg class="ui-icon"><use href="#i-bell"/></svg><span class="ui-icon-btn__dot"></span></button>
+        <span class="ui-avatar tone-secondary" aria-label="Your account" role="img">OR</span>
+      </div>
+    </header>
+
+    <main class="ui-content">
+      <div class="ui-page-header">
+        <h1 class="ui-page-title">Calendar</h1>
+        <nav aria-label="Breadcrumb"><ol class="ui-breadcrumb"><li><a href="#">Dashboard</a></li><li aria-current="page">Calendar</li></ol></nav>
+      </div>
+
+      <div class="ui-grid">
+        <div class="ui-card ui-stat">
+          <div class="ui-stat__top"><div><p class="ui-stat__label">Bookings this week</p><p class="ui-stat__value">128</p></div><span class="ui-stat__icon tone-primary"><svg class="ui-icon"><use href="#i-cal"/></svg></span></div>
+          <p class="ui-stat__meta"><span class="ui-badge ui-badge--soft ui-badge--sm tone-success">+12%</span> vs last week</p>
+        </div>
+        <div class="ui-card ui-stat">
+          <div class="ui-stat__top"><div><p class="ui-stat__label">Hours scheduled</p><p class="ui-stat__value">342 h</p></div><span class="ui-stat__icon tone-secondary"><svg class="ui-icon"><use href="#i-clock"/></svg></span></div>
+          <p class="ui-stat__meta"><span class="ui-badge ui-badge--soft ui-badge--sm tone-success">+6%</span> vs last week</p>
+        </div>
+        <div class="ui-card ui-stat">
+          <div class="ui-stat__top"><div><p class="ui-stat__label">Team utilization</p><p class="ui-stat__value">86%</p></div><span class="ui-stat__icon tone-success"><svg class="ui-icon"><use href="#i-users"/></svg></span></div>
+          <p class="ui-stat__meta"><span class="ui-badge ui-badge--soft ui-badge--sm tone-success">+3 pts</span> vs last week</p>
+        </div>
+        <div class="ui-card ui-stat">
+          <div class="ui-stat__top"><div><p class="ui-stat__label">No-shows</p><p class="ui-stat__value">4</p></div><span class="ui-stat__icon tone-danger"><svg class="ui-icon"><use href="#i-x"/></svg></span></div>
+          <p class="ui-stat__meta"><span class="ui-badge ui-badge--soft ui-badge--sm tone-danger">+2</span> vs last week</p>
+        </div>
+      </div>
+
+      <section class="ui-card">
+        <header class="ui-card__header">
+          <div style="display:flex;align-items:center;gap:8px">
+            <button class="ui-btn ui-btn--neutral ui-btn--sm">Today</button>
+            <button class="ui-btn ui-btn--neutral ui-btn--sm ui-btn--icon" aria-label="Previous week"><svg class="ui-icon ui-icon--sm"><use href="#i-left"/></svg></button>
+            <button class="ui-btn ui-btn--neutral ui-btn--sm ui-btn--icon" aria-label="Next week"><svg class="ui-icon ui-icon--sm"><use href="#i-right"/></svg></button>
+            <h2 class="ui-card__title" style="margin-left:8px">24 – 30 Nov 2026</h2>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+            <div class="ui-segmented ui-segmented--sm" role="group" aria-label="Calendar view">
+              <button aria-pressed="false">Day</button><button aria-pressed="true">Week</button><button aria-pressed="false">Month</button>
+            </div>
+            <button class="ui-btn ui-btn--sm" id="new-event"><svg class="ui-icon ui-icon--sm"><use href="#i-plus"/></svg>New event</button>
+          </div>
+        </header>
+        <div class="ui-card__body ui-table-wrap" style="padding-top:0">
+          <div class="ui-cal">
+            <div class="ui-cal__head">
+              <span></span>
+              <div class="ui-cal__day is-today"><span class="ui-cal__dow">Mon</span><span class="ui-cal__num">24</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Tue</span><span class="ui-cal__num">25</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Wed</span><span class="ui-cal__num">26</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Thu</span><span class="ui-cal__num">27</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Fri</span><span class="ui-cal__num">28</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Sat</span><span class="ui-cal__num">29</span></div>
+              <div class="ui-cal__day"><span class="ui-cal__dow">Sun</span><span class="ui-cal__num">30</span></div>
+            </div>
+            <div class="ui-cal__body">
+              <div class="ui-cal__times"><span style="--h:0">08:00</span><span style="--h:1">09:00</span><span style="--h:2">10:00</span><span style="--h:3">11:00</span><span style="--h:4">12:00</span><span style="--h:5">13:00</span><span style="--h:6">14:00</span><span style="--h:7">15:00</span><span style="--h:8">16:00</span><span style="--h:9">17:00</span></div>
+              <div class="ui-cal__col">
+                <a href="#" class="ui-event" style="--start:9;--end:9.5"><span class="ui-event__title">Stand-up</span><span class="ui-event__time">09:00 – 09:30</span></a>
+                <a href="#" class="ui-event tone-secondary" style="--start:10;--end:11"><span class="ui-event__title">Design review</span><span class="ui-event__time">10:00 – 11:00</span></a>
+                <a href="#" class="ui-event tone-success" style="--start:14;--end:16"><span class="ui-event__title">Focus block</span><span class="ui-event__time">14:00 – 16:00</span></a>
+              </div>
+              <div class="ui-cal__col">
+                <a href="#" class="ui-event" style="--start:9;--end:9.5"><span class="ui-event__title">Stand-up</span><span class="ui-event__time">09:00 – 09:30</span></a>
+                <a href="#" class="ui-event tone-warning" style="--start:12.5;--end:13.5"><span class="ui-event__title">Client lunch</span><span class="ui-event__time">12:30 – 13:30</span></a>
+              </div>
+              <div class="ui-cal__col">
+                <a href="#" class="ui-event" style="--start:9;--end:9.5"><span class="ui-event__title">Stand-up</span><span class="ui-event__time">09:00 – 09:30</span></a>
+                <a href="#" class="ui-event tone-secondary" style="--start:15;--end:17"><span class="ui-event__title">Client workshop</span><span class="ui-event__time">15:00 – 17:00</span></a>
+              </div>
+              <div class="ui-cal__col">
+                <a href="#" class="ui-event" style="--start:9;--end:9.5"><span class="ui-event__title">Stand-up</span><span class="ui-event__time">09:00 – 09:30</span></a>
+                <a href="#" class="ui-event tone-danger" style="--start:11;--end:12"><span class="ui-event__title">Panel interview</span><span class="ui-event__time">11:00 – 12:00</span></a>
+              </div>
+              <div class="ui-cal__col">
+                <a href="#" class="ui-event" style="--start:9;--end:9.5"><span class="ui-event__title">Stand-up</span><span class="ui-event__time">09:00 – 09:30</span></a>
+                <a href="#" class="ui-event tone-success" style="--start:16;--end:17"><span class="ui-event__title">Team retro</span><span class="ui-event__time">16:00 – 17:00</span></a>
+              </div>
+              <div class="ui-cal__col is-weekend"></div>
+              <div class="ui-cal__col is-weekend"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ui-grid" style="--ui-grid-min: 340px">
+        <section class="ui-card">
+          <header class="ui-card__header"><h2 class="ui-card__title">New event</h2></header>
+          <div class="ui-card__body" style="display:flex;flex-direction:column;gap:16px">
+            <div class="ui-field"><label class="ui-label" for="t">Title</label><input class="ui-input" id="t" placeholder="e.g. Design review"></div>
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+              <div class="ui-field"><label class="ui-label" for="d">Date</label><input class="ui-input" id="d" type="date" value="2026-11-24"></div>
+              <div class="ui-field"><label class="ui-label" for="du">Duration</label><select class="ui-select" id="du"><option>30 minutes</option><option selected>1 hour</option></select></div>
+            </div>
+            <div class="ui-field"><label class="ui-label" for="e">Attendee email</label><input class="ui-input" id="e" value="sam@company" aria-invalid="true" aria-describedby="e-err"><p class="ui-hint ui-hint--error" id="e-err">Enter a full email address</p></div>
+            <div class="ui-field"><label class="ui-label" for="b">Buffer</label><div class="ui-input-group"><input class="ui-input" id="b" type="number" value="15"><span class="ui-addon">min</span></div></div>
+            <label class="ui-check"><input type="checkbox" checked> Send calendar invite</label>
+            <div class="ui-switch-row"><label for="sw">Email reminders</label><button class="ui-switch" id="sw" role="switch" aria-checked="true"></button></div>
+          </div>
+          <footer class="ui-card__footer"><button class="ui-btn ui-btn--neutral">Cancel</button><button class="ui-btn">Save event</button></footer>
+        </section>
+
+        <section class="ui-card">
+          <header class="ui-card__header"><h2 class="ui-card__title">Feedback</h2></header>
+          <div class="ui-card__body" style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span class="ui-status tone-success">Confirmed</span><span class="ui-status tone-warning">Pending</span><span class="ui-status">Tentative</span><span class="ui-status tone-danger">Cancelled</span><span class="ui-status tone-neutral">Completed</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <span class="ui-badge">Primary</span><span class="ui-badge tone-warning">Warning</span><span class="ui-badge ui-badge--soft tone-secondary">Soft</span><span class="ui-badge ui-badge--outline tone-info">Outline</span>
+            </div>
+            <div class="ui-alert tone-warning" role="status">
+              <span class="ui-alert__icon" aria-hidden="true">!</span>
+              <div class="ui-alert__content"><p class="ui-alert__title">Two shifts are uncovered</p><p class="ui-alert__body">Friday 18:00–22:00 still needs staff before Thursday noon.</p></div>
+              <button class="ui-alert__close" aria-label="Dismiss"><svg class="ui-icon ui-icon--sm"><use href="#i-x"/></svg></button>
+            </div>
+            <div><div class="ui-progress-label"><span>Week booked</span><span>72%</span></div><div class="ui-progress" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="Week booked"><div class="ui-progress__bar" style="width:72%"></div></div></div>
+            <div class="ui-avatar-group"><span class="ui-avatar">AM</span><span class="ui-avatar tone-secondary">JR</span><span class="ui-avatar tone-success">LK</span><span class="ui-avatar tone-neutral">+4</span></div>
+            <div class="ui-tabs" role="tablist" aria-label="Bookings"><button role="tab" aria-selected="true">Upcoming</button><button role="tab" aria-selected="false">Past</button><button role="tab" aria-selected="false">Requests <span class="ui-count">3</span></button></div>
+            <nav class="ui-pagination" aria-label="Pagination"><a href="#" aria-label="Previous page"><svg class="ui-icon ui-icon--sm"><use href="#i-left"/></svg></a><a href="#" aria-current="page">1</a><a href="#">2</a><a href="#">3</a><a href="#" aria-label="Next page"><svg class="ui-icon ui-icon--sm"><use href="#i-right"/></svg></a></nav>
+          </div>
+        </section>
+      </div>
+
+      <section class="ui-card">
+        <header class="ui-card__header"><h2 class="ui-card__title">Upcoming bookings</h2><a class="ui-link" href="#">View all</a></header>
+        <div class="ui-card__body ui-table-wrap">
+          <table class="ui-table">
+            <thead><tr><th scope="col">Attendee</th><th scope="col">Event</th><th scope="col">Date</th><th scope="col">Status</th><th scope="col" class="is-actions"><span class="ui-sr-only">Actions</span></th></tr></thead>
+            <tbody>
+              <tr><td><div class="ui-cell-person"><span class="ui-avatar">AM</span><div><span class="ui-cell-person__name">Ana Morales</span><span class="ui-cell-person__meta">ana@example.com</span></div></div></td><td>Design review</td><td>Mon 24 Nov, 10:00</td><td><span class="ui-status tone-success">Confirmed</span></td><td class="is-actions"><button class="ui-btn ui-btn--ghost ui-btn--sm">Edit</button></td></tr>
+              <tr><td><div class="ui-cell-person"><span class="ui-avatar tone-secondary">JR</span><div><span class="ui-cell-person__name">Jonah Reed</span><span class="ui-cell-person__meta">jonah@example.com</span></div></div></td><td>Onboarding call</td><td>Mon 24 Nov, 13:30</td><td><span class="ui-status tone-warning">Pending</span></td><td class="is-actions"><button class="ui-btn ui-btn--ghost ui-btn--sm">Edit</button></td></tr>
+              <tr><td><div class="ui-cell-person"><span class="ui-avatar tone-success">LK</span><div><span class="ui-cell-person__name">Lena Kraus</span><span class="ui-cell-person__meta">lena@example.com</span></div></div></td><td>1:1 check-in</td><td>Tue 25 Nov, 09:00</td><td><span class="ui-status tone-danger">Cancelled</span></td><td class="is-actions"><button class="ui-btn ui-btn--ghost ui-btn--sm">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div class="ui-toast-region" aria-live="polite" id="toasts"></div>
+
+<script>
+  const root = document.documentElement;
+  document.getElementById('theme').addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+  const sidebar = document.getElementById('sidebar');
+  document.getElementById('menu').addEventListener('click', () => {
+    if (window.matchMedia('(max-width: 991.98px)').matches) sidebar.classList.toggle('is-open');
+    else sidebar.classList.toggle('is-collapsed');
+  });
+  document.getElementById('backdrop').addEventListener('click', () => sidebar.classList.remove('is-open'));
+  document.querySelectorAll('.ui-switch').forEach(s => s.addEventListener('click', () => {
+    s.setAttribute('aria-checked', s.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+  }));
+  document.querySelectorAll('.ui-segmented').forEach(g => g.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  }));
+  document.getElementById('new-event').addEventListener('click', () => {
+    const t = document.createElement('div');
+    t.className = 'ui-toast tone-success';
+    t.innerHTML = '<span class="ui-toast__icon"><svg class="ui-icon"><use href="#i-check"/></svg></span><span class="ui-toast__message">Event draft created</span><button class="ui-btn ui-btn--ghost ui-btn--sm">Undo</button>';
+    document.getElementById('toasts').appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+  });
+</script>
+</body>
+</html>
